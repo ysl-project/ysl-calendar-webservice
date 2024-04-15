@@ -27,8 +27,8 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation 'org.springframework.boot:spring-boot-starter-mail:2.4.4'
-
+	implementation 'org.springframework.boot:spring-boot-starter-mail' // java mail 발송 의존성 추가
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis' // redis 의존성 추가
 }
 
 tasks.named('test') {
