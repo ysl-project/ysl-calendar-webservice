@@ -1,5 +1,6 @@
 package com.ysl.calendar.user.controller;
 
+import com.ysl.calendar.domain.users.CalendarUser;
 import com.ysl.calendar.domain.users.CalendarUserRepository;
 import com.ysl.calendar.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
 @RestController()
@@ -32,6 +34,14 @@ public class UserController {
         return userService.verifiedCode(email, code);
     }
 
+    // 회원가입
+    @PostMapping("/add")
+    public String addItem(@ModelAttribute CalendarUser calendarUser, RedirectAttributes redirectAttributes) {
+        CalendarUser savedItem = userService.save(calendarUser);
+        redirectAttributes.addAttribute("userId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true);
+        return "redirect:/user";
+    }
 
 
 }
