@@ -9,5 +9,4 @@ public class YslCalendarWebserviceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(YslCalendarWebserviceApplication.class, args);
 	}
-	// scw test test!!!
 }
