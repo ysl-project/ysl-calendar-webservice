@@ -2,6 +2,7 @@ package com.ysl.calendar.user.service;
 
 import com.ysl.calendar.domain.users.CalendarUser;
 import com.ysl.calendar.domain.users.CalendarUserRepository;
+import com.ysl.calendar.user.repository.UserAddRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +20,7 @@ public class UserService {
 
     private final CalendarUserRepository calendarUserRepository;
     private final MailService mailService;
+    private final UserAddRepository userAddRepository;
 
     private static String emailAuthCode = null;
 
@@ -89,5 +91,8 @@ public class UserService {
         return validationCheck;
     }
 
-
+    // 회원가입
+    public CalendarUser save(CalendarUser calendarUser) {
+        return userAddRepository.save(calendarUser);
+    }
 }

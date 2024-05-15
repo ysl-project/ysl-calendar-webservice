@@ -8,7 +8,7 @@ import lombok.Setter;
 public class CalendarUser {
 
     String id;
-    String eamil;
+    String email;
     String name;
     String nickname;
     String password;
@@ -19,9 +19,9 @@ public class CalendarUser {
     public CalendarUser() {
     }
 
-    public CalendarUser(String id, String eamil, String name, String nickname, String password, String image, String comment, String social) {
+    public CalendarUser(String id, String email, String name, String nickname, String password, String image, String comment, String social) {
         this.id = id;
-        this.eamil = eamil;
+        this.email = email;
         this.name = name;
         this.nickname = nickname;
         this.password = password;

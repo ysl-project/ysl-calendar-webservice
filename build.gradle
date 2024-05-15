@@ -31,6 +31,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis' // redis 의존성 추가
 	implementation 'org.postgresql:postgresql:42.5.1'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	//MyBatis 추가
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
 }
 
 tasks.named('test') {
