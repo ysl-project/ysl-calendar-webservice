@@ -5,4 +5,8 @@
         insert into cal_user (id, email, name, nickname, password, image, comment, social)
         values (#{id}, #{email}, #{name}, #{nickname}, #{password}, #{image}, #{comment}, #{social})
     </insert>
+
+    <select id="findByEmail" parameterType="String" resultType="com.ysl.calendar.domain.users.CalendarUser">
+        select id, email, name, nickname, password, image, comment, social from cal_user where email = #{email}
+    </select>
 </mapper>

@@ -6,4 +6,7 @@ public interface UserAddRepository {
     // 회원가입
     CalendarUser save(CalendarUser calendarUser);
 
+    // 이메일로 회원조회
+    CalendarUser findByEmail(String email);
+
 }

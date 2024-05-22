@@ -18,4 +18,20 @@ public class UserAddRepository implements com.ysl.calendar.user.repository.UserA
         userAddMapper.save(calendarUser);
         return calendarUser;
     }
+
+    @Override
+    public CalendarUser findByEmail(String email) {
+        log.info("email [" + email + "] --> 회원정보 조회");
+        CalendarUser findUser = null;
+        try{
+            findUser = (CalendarUser) userAddMapper.findByEmail(email);
+        }catch (Exception e){ // @todo : 에러 로직 수정
+            log.error(e.getMessage());
+            log.error("에러 발생");
+        }
+
+        return findUser;
+    }
+
+
 }

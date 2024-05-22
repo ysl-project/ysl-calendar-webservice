@@ -1,7 +1,6 @@
 package com.ysl.calendar.user.controller;
 
 import com.ysl.calendar.domain.users.CalendarUser;
-import com.ysl.calendar.domain.users.CalendarUserRepository;
 import com.ysl.calendar.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UserController {
 
     private final UserService userService;
-    CalendarUserRepository calUser = new CalendarUserRepository();
 
     /* 인증 이메일 전송 메소드 */
     @PostMapping ("/check-email")
