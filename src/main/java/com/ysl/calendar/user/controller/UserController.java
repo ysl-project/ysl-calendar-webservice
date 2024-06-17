@@ -41,5 +41,13 @@ public class UserController {
         return "redirect:/user";
     }
 
+    /* 로그인 */
+    @PostMapping("/login")
+    public String login(@ModelAttribute CalendarUser calendarUser, RedirectAttributes redirectAttributes) {
+        boolean loginSucc = userService.login(calendarUser);
+        redirectAttributes.addAttribute("userId", calendarUser.getId());
+        redirectAttributes.addAttribute("status", loginSucc);
+        return redirectAttributes.toString();
+    }
 
 }

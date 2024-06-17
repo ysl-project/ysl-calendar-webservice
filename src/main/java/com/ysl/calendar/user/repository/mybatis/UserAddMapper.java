@@ -10,4 +10,7 @@ public interface UserAddMapper {
 
     // 회원조회
     CalendarUser findByEmail(String email);
+
+    // 로그인
+    CalendarUser findById(String id);
 }

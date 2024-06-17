@@ -33,5 +33,19 @@ public class UserAddRepository implements com.ysl.calendar.user.repository.UserA
         return findUser;
     }
 
+    @Override
+    public CalendarUser findById(String id) {
+        log.info("User ID [" + id + "] --> id를 검증하고 로그인을 진행합니다.");
+        CalendarUser user = null;
+        try{
+            user = (CalendarUser) userAddMapper.findById(id);
+        }catch (Exception e){ // @todo : 에러 로직 수정
+            log.error(e.getMessage());
+            log.error("에러 발생");
+        }
+
+        return user;
+    }
+
 
 }

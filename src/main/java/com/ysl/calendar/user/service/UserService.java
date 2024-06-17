@@ -105,4 +105,28 @@ public class UserService {
     public CalendarUser save(CalendarUser calendarUser) {
         return userAddRepository.save(calendarUser);
     }
+
+    // 로그인
+    public boolean login(CalendarUser calendarUser) {
+        CalendarUser loginUser = null;
+        String tempPasswd = calendarUser.getPassword();
+        boolean loginChk = false;
+
+        try{
+            loginUser = (CalendarUser) userAddRepository.findById(calendarUser.getId());
+            if(loginUser == null){
+                log.error("일치하는 회원정보가 없습니다.");
+                throw new NullPointerException();
+            }
+
+            // @todo : 복호화 로직
+            String passWd = loginUser.getPassword();
+            loginChk = tempPasswd.equals(passWd) ? true : false;
+        }catch (Exception e){
+            log.error("로그인 중 에러 발생");
+            log.error(e.getMessage());
+        }
+
+        return loginChk;
+    }
 }
