@@ -37,6 +37,7 @@ spring:
       host: #hostname#
       port: #port#
       password: #redis_password#
+      connect-status: Y
 
 # mybatis 설정
 mybatis:
