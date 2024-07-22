@@ -22,8 +22,8 @@ public class UserService {
     private final UserAddRepository userAddRepository;
     private final RedisUtil redisUtil;
 
-    @Value("${spring.mail.auth-code-expiration-millis}")
-    private long authCodeExpirationMillis;
+    @Value("${spring.mail.auth-code-expiration}")
+    private long authCodeExpirationSec;
 
     /* email 인증코드 전송 로직 */
     public void sendCodeToEmail(String toEmail) throws Exception {
@@ -42,8 +42,8 @@ public class UserService {
         mailService.sendEmail(toEmail, title, authCode);
 
         // 4. 인증코드 redis에 저장 key : email / value : authcode
-        log.debug("redis 에 이메일 인증코드 저장 -> 인증코드 저장시간은 [" + authCodeExpirationMillis + "] 만큼 유효합니다.");
-        redisUtil.setRedisDataExpire(toEmail, authCode, authCodeExpirationMillis); // @todo : 인증코드 저장시간 안 먹음 --> 확인 필요
+        log.debug("redis 에 이메일 인증코드 저장 -> 인증코드 저장시간은 [" + authCodeExpirationSec + "] 만큼 유효합니다.");
+        redisUtil.setRedisDataExpire(toEmail, authCode, authCodeExpirationSec); // @todo : 인증코드 저장시간 안 먹음 --> 확인 필요
     }
 
     /* 이메일 중복 체크 */
