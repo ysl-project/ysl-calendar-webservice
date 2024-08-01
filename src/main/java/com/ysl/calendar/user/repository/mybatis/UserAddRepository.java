@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+
 @Slf4j
 @Repository
 @RequiredArgsConstructor
@@ -45,6 +47,19 @@ public class UserAddRepository implements com.ysl.calendar.user.repository.UserA
         }
 
         return user;
+    }
+
+    @Override
+    public ArrayList<CalendarUser> findByNickname(String nickname) {
+        ArrayList<CalendarUser> userList = null;
+        try{
+            userList = userAddMapper.findByNickname(nickname);
+        }catch (Exception e){
+            log.error(e.getMessage());
+            log.error("에러 발생");
+        }
+
+        return userList;
     }
 
 
