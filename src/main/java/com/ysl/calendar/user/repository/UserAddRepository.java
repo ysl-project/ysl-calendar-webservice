@@ -12,4 +12,7 @@ public interface UserAddRepository {
     // 아이디로 회원조회
     CalendarUser findById(String id);
 
+    // 회원정보 조회
+    CalendarUser getUserById(String id);
+    
 }

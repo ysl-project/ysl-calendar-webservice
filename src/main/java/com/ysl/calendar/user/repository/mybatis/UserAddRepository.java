@@ -52,5 +52,18 @@ public class UserAddRepository implements com.ysl.calendar.user.repository.UserA
         return user;
     }
 
+    /* 회원정보 조회 */
+    @Override
+    public CalendarUser getUserById(String id) {
+        log.debug("[회원정보 조회 ] ID : " + id);
+        CalendarUser getUser= null;
+        try {
+            getUser = userAddMapper.getUserById(id);
+        }catch (Exception e){
+            log.error(e.getMessage());
+            log.error("회원정보 조회 에러 발생");
+        }
+        return getUser;
+    }
 
 }

@@ -129,4 +129,16 @@ public class UserService {
 
         return loginChk;
     }
+
+    /* 회원정보 조회 */
+    public CalendarUser getUserById(String id){
+        CalendarUser getUserId = null;
+        try{
+            getUserId = (CalendarUser) userAddRepository.getUserById(id);
+        }catch (Exception e){
+            log.error("회원정보 조회 중 에러 발생");
+            log.error(e.getMessage());
+        }
+        return getUserId;
+    }
 }
