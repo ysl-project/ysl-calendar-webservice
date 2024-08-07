@@ -56,7 +56,7 @@ public class UserAddRepository implements com.ysl.calendar.user.repository.UserA
     @Override
     public CalendarUser getUserById(String id) {
         log.debug("[회원정보 조회 ] ID : " + id);
-        CalendarUser getUser= null;
+        CalendarUser getUser = null;
         try {
             getUser = userAddMapper.getUserById(id);
         }catch (Exception e){
@@ -66,4 +66,18 @@ public class UserAddRepository implements com.ysl.calendar.user.repository.UserA
         return getUser;
     }
 
+    /* 회원정보 수정 */
+    @Override
+    public void updateUser(CalendarUser calendarUser) {
+        log.debug("[회원정보 수정 ] ID : " + calendarUser.getId());
+        try {
+            userAddMapper.updateUser(calendarUser);
+        }catch (IllegalArgumentException ie){
+            log.error("회원정보 없음");
+            log.error(ie.getMessage());
+        }catch (Exception e){
+            log.error(e.getMessage());
+            log.error("회원정보 수정 에러 발생");
+        }
+    }
 }

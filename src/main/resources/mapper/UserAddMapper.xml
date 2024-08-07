@@ -11,10 +11,15 @@
     </select>
 
     <select id="findById" parameterType="String" resultType="com.ysl.calendar.domain.users.CalendarUser">
-        select id, email, name, nickname, password, image, comment, social from cal_user where id = #{id}
+        select id, email, name, nickname, password, image, comment, social, birthdate from cal_user where id = #{id}
     </select>
 
     <select id="getUserById" parameterType="String" resultType="com.ysl.calendar.domain.users.CalendarUser">
         select * from cal_user where id = #{id}
     </select>
+
+    <update id="updateUser">
+        update cal_user set nickname = #{nickname}, birthdate = #{birthdate}, image = #{image}, comment = #{comment} where id = #{id}
+    </update>
+
 </mapper>

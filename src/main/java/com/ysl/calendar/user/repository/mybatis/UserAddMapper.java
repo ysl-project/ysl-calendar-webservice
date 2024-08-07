@@ -17,4 +17,7 @@ public interface UserAddMapper {
 
     // 회원정보 조회
     CalendarUser getUserById(@Param("id") String id);
+
+    // 회원정보 수정
+    void updateUser(CalendarUser calendarUser);
 }

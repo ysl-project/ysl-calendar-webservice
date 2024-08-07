@@ -15,4 +15,6 @@ public interface UserAddRepository {
     // 회원정보 조회
     CalendarUser getUserById(String id);
     
+    // 회원정보 수정
+    void updateUser(CalendarUser calendarUser);
 }

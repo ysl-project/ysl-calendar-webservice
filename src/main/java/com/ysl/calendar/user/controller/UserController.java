@@ -53,4 +53,10 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+    /* 회원정보 수정 */
+    @PostMapping("/{id}")
+    public void updateUser(@PathVariable("id") String id, @ModelAttribute CalendarUser calendarUser) {
+        userService.updateUser(id, calendarUser);
+    }
+
 }
