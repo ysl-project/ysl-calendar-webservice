@@ -32,13 +32,10 @@ public class UserController {
         return userService.verifiedCode(email, code);
     }
 
-    // 회원가입
+    /*회원가입 */
     @PostMapping("/add")
-    public String addItem(@ModelAttribute CalendarUser calendarUser, RedirectAttributes redirectAttributes) {
-        CalendarUser savedItem = userService.save(calendarUser);
-        redirectAttributes.addAttribute("userId", savedItem.getId());
-        redirectAttributes.addAttribute("status", true);
-        return "redirect:/user";
+    public CalendarUser addItem(@ModelAttribute CalendarUser calendarUser, RedirectAttributes redirectAttributes) {
+        return userService.save(calendarUser);
     }
 
     /* 로그인 */

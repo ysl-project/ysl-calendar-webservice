@@ -14,8 +14,13 @@ public class UserAddRepository implements com.ysl.calendar.user.repository.UserA
     // 회원가입
     @Override
     public CalendarUser save(CalendarUser calendarUser) {
-        log.info("[회원가입]");
-        userAddMapper.save(calendarUser);
+        log.debug("[회원가입]");
+        try {
+            userAddMapper.save(calendarUser);
+        }catch (Exception e){
+            log.error(e.getMessage());
+            log.error("회원가입 에러 발생");
+        }
         return calendarUser;
     }
 
