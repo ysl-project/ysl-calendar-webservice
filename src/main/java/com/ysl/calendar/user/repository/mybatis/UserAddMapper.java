@@ -2,6 +2,7 @@ package com.ysl.calendar.user.repository.mybatis;
 
 import com.ysl.calendar.domain.users.CalendarUser;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 
@@ -18,4 +19,10 @@ public interface UserAddMapper {
 
     // 닉네임 체크
     ArrayList<CalendarUser> findByNickname(String nickname);
+
+    // 회원정보 조회
+    CalendarUser getUserById(@Param("id") String id);
+
+    // 회원정보 수정
+    void updateUser(CalendarUser calendarUser);
 }

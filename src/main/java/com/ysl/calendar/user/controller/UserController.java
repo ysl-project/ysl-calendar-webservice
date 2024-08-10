@@ -32,13 +32,10 @@ public class UserController {
         return userService.verifiedCode(email, code);
     }
 
-    // 회원가입
+    /*회원가입 */
     @PostMapping("/add")
-    public String addItem(@ModelAttribute CalendarUser calendarUser, RedirectAttributes redirectAttributes) {
-        CalendarUser savedItem = userService.save(calendarUser);
-        redirectAttributes.addAttribute("userId", savedItem.getId());
-        redirectAttributes.addAttribute("status", true);
-        return "redirect:/user";
+    public CalendarUser addItem(@ModelAttribute CalendarUser calendarUser, RedirectAttributes redirectAttributes) {
+        return userService.save(calendarUser);
     }
 
     /* 로그인 */
@@ -58,4 +55,16 @@ public class UserController {
         redirectAttributes.addAttribute("result", result);
         return redirectAttributes.toString();
     }
+    /* 회원정보 조회 */
+    @GetMapping("/{id}")
+    public CalendarUser getUser(@PathVariable("id") String id) {
+        return userService.getUserById(id);
+    }
+
+    /* 회원정보 수정 */
+    @PostMapping("/{id}")
+    public void updateUser(@PathVariable("id") String id, @ModelAttribute CalendarUser calendarUser) {
+        userService.updateUser(id, calendarUser);
+    }
+
 }

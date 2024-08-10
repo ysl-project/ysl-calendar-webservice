@@ -15,6 +15,7 @@ public class CalendarUser {
     String image;
     String comment;
     String social;
+    String birthdate;
 
     public CalendarUser() {
     }
@@ -28,5 +29,6 @@ public class CalendarUser {
         this.image = image;
         this.comment = comment;
         this.social = social;
+        this.birthdate = birthdate;
     }
 }

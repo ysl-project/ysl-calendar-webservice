@@ -16,8 +16,13 @@ public class UserAddRepository implements com.ysl.calendar.user.repository.UserA
     // 회원가입
     @Override
     public CalendarUser save(CalendarUser calendarUser) {
-        log.info("[회원가입]");
-        userAddMapper.save(calendarUser);
+        log.debug("[회원가입]");
+        try {
+            userAddMapper.save(calendarUser);
+        }catch (Exception e){
+            log.error(e.getMessage());
+            log.error("회원가입 에러 발생");
+        }
         return calendarUser;
     }
 
@@ -62,5 +67,32 @@ public class UserAddRepository implements com.ysl.calendar.user.repository.UserA
         return userList;
     }
 
+    /* 회원정보 조회 */
+    @Override
+    public CalendarUser getUserById(String id) {
+        log.debug("[회원정보 조회 ] ID : " + id);
+        CalendarUser getUser = null;
+        try {
+            getUser = userAddMapper.getUserById(id);
+        }catch (Exception e){
+            log.error(e.getMessage());
+            log.error("회원정보 조회 에러 발생");
+        }
+        return getUser;
+    }
 
+    /* 회원정보 수정 */
+    @Override
+    public void updateUser(CalendarUser calendarUser) {
+        log.debug("[회원정보 수정 ] ID : " + calendarUser.getId());
+        try {
+            userAddMapper.updateUser(calendarUser);
+        }catch (IllegalArgumentException ie){
+            log.error("회원정보 없음");
+            log.error(ie.getMessage());
+        }catch (Exception e){
+            log.error(e.getMessage());
+            log.error("회원정보 수정 에러 발생");
+        }
+    }
 }

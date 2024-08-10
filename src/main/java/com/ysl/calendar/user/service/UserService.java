@@ -150,4 +150,37 @@ public class UserService {
         log.debug("닉네임 중복 체크 결과 [" + result + "]");
         return result;
     }
+
+    /* 회원정보 조회 */
+    public CalendarUser getUserById(String id){
+        CalendarUser getUserId = null;
+        try{
+            getUserId = (CalendarUser) userAddRepository.getUserById(id);
+        }catch (Exception e){
+            log.error("회원정보 조회 중 에러 발생");
+            log.error(e.getMessage());
+        }
+        return getUserId;
+    }
+
+    /* 회원정보 수정 */
+    public void updateUser(String id, CalendarUser calendarUser){
+        CalendarUser updateUser = userAddRepository.findById(id);
+        log.debug("Service 회원정보 수정 updateUser ID : " + updateUser.getId());
+        try {
+            if (updateUser != null) {
+                updateUser.setNickname(calendarUser.getNickname());
+                updateUser.setBirthdate(calendarUser.getBirthdate());
+                updateUser.setImage(calendarUser.getImage());
+                updateUser.setComment(calendarUser.getComment());
+                userAddRepository.updateUser(updateUser);
+            }
+        }catch (IllegalArgumentException ie){
+            log.error("회원정보 없음");
+            log.error(ie.getMessage());
+        }catch (Exception e){
+            log.error("회원정보 수정 중 에러 발생");
+            log.error(e.getMessage());
+        }
+    }
 }

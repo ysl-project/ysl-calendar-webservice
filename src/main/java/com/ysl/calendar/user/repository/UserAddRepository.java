@@ -17,4 +17,9 @@ public interface UserAddRepository {
     // 닉네임 존재 여부 확인
     public ArrayList<CalendarUser> findByNickname(String nickname);
 
+    // 회원정보 조회
+    CalendarUser getUserById(String id);
+
+    // 회원정보 수정
+    void updateUser(CalendarUser calendarUser);
 }
