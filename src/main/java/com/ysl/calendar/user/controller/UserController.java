@@ -47,6 +47,14 @@ public class UserController {
         return redirectAttributes.toString();
     }
 
+    /* 닉네임 체크 */
+    @GetMapping("/check-nickname")
+    public String checkNickname(@RequestParam("nickname") String nickname, RedirectAttributes redirectAttributes){
+        boolean result = userService.checkNickname(nickname);
+        log.debug("조회 문자열 [" + nickname + "] 결과 [" + result + "]");
+        redirectAttributes.addAttribute("result", result);
+        return redirectAttributes.toString();
+    }
     /* 회원정보 조회 */
     @GetMapping("/{id}")
     public CalendarUser getUser(@PathVariable("id") String id) {

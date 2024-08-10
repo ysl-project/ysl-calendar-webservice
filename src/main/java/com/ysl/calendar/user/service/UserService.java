@@ -130,6 +130,27 @@ public class UserService {
         return loginChk;
     }
 
+    // 닉네임 중복 체크
+    public boolean checkNickname(String nickname){
+        log.debug("== 닉네임 중복 체크 start ==");
+        boolean result = false;
+
+        try{
+            if(userAddRepository.findByNickname(nickname).size() > 0){
+                result = false;
+            }else{
+                result = true;
+            }
+        }catch (Exception e){
+            log.error("닉네임 중복 체크 중 에러 발생");
+            log.error(e.getMessage());
+            result = false;
+        }
+
+        log.debug("닉네임 중복 체크 결과 [" + result + "]");
+        return result;
+    }
+
     /* 회원정보 조회 */
     public CalendarUser getUserById(String id){
         CalendarUser getUserId = null;

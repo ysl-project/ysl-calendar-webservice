@@ -2,6 +2,8 @@ package com.ysl.calendar.user.repository;
 
 import com.ysl.calendar.domain.users.CalendarUser;
 
+import java.util.ArrayList;
+
 public interface UserAddRepository {
     // 회원가입
     CalendarUser save(CalendarUser calendarUser);
@@ -12,9 +14,12 @@ public interface UserAddRepository {
     // 아이디로 회원조회
     CalendarUser findById(String id);
 
+    // 닉네임 존재 여부 확인
+    public ArrayList<CalendarUser> findByNickname(String nickname);
+
     // 회원정보 조회
     CalendarUser getUserById(String id);
-    
+
     // 회원정보 수정
     void updateUser(CalendarUser calendarUser);
 }

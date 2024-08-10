@@ -14,6 +14,10 @@
         select id, email, name, nickname, password, image, comment, social, birthdate from cal_user where id = #{id}
     </select>
 
+    <select id="findByNickname" parameterType="String" resultType="com.ysl.calendar.domain.users.CalendarUser">
+        select id, email, name, nickname, password, image, comment, social from cal_user where nickname like concat('%',#{nickname},'%')
+    </select>
+
     <select id="getUserById" parameterType="String" resultType="com.ysl.calendar.domain.users.CalendarUser">
         select * from cal_user where id = #{id}
     </select>
