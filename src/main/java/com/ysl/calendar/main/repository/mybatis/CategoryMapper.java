@@ -14,5 +14,10 @@ public interface CategoryMapper {
     // 회원별 category 조회
     ArrayList<CalendarCategory> selectAll(String createUser);
 
+    // id로 category 조회
+    CalendarCategory select(Long categoryId);
+
+    // category 삭제
+    int deleteByKey(Long categoryId);
 
 }

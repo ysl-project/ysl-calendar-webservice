@@ -10,4 +10,8 @@ public interface MainRepository {
     boolean save(Object object);
 
     ArrayList<Object> selectAll(String key);
+
+    Object select(Object key);
+
+    boolean deleteByKey(Object object);
 }

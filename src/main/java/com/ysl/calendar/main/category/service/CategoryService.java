@@ -66,6 +66,50 @@ public class CategoryService {
         return returnList;
     }
 
+    public CalendarCategory select(CalendarCategory category){
+        log.debug("== 카테고리 조회 start ==");
+        Object obj = null;
+
+        try{
+            obj = categoryRepository.select(Long.parseLong(category.getId()));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        log.debug("return Obj [" + ((CalendarCategory)obj).toString() + "]");
+        return (CalendarCategory) obj;
+    }
+
+    public CalendarCategory updateCategory(CalendarCategory calendarCategory){
+        log.debug("== 카테고리 수정 start ==");
+        CalendarCategory updateCategory = null;
+
+        try{
+            // 수정 메소드
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return updateCategory;
+    }
+
+    public boolean deleteCategory(Long categoryId){
+        log.debug("== 카테고리 삭제 start ==");
+        boolean result = false;
+
+        try{
+            log.debug("삭제할 카테고리 ID [" + String.valueOf(categoryId) + "]");
+            result = categoryRepository.deleteByKey(categoryId);
+
+            log.debug("삭제 결과 [" + result + "]");
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+        return result;
+    }
+
 
 
 }
