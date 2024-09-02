@@ -44,4 +44,37 @@ public class CategoryRepository implements MainRepository {
         }
         return (ArrayList<Object>) (ArrayList<?>) categoryList;
     }
+
+    @Override
+    public Object select(Object key) {
+        CalendarCategory calendarCategory = null;
+
+        try{
+            if(key != null){
+                calendarCategory = categoryMapper.select((Long)key);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
+        return calendarCategory;
+    }
+
+
+    @Override
+    public boolean deleteByKey(Object key) {
+        int result = 0;
+        try{
+            if(key != null){
+                result = categoryMapper.deleteByKey((Long)key);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+        return result > 0 ? true : false;
+    }
 }

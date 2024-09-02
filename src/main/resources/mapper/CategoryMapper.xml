@@ -10,4 +10,12 @@
         select * from cal_category where create_user = #{createUser}
     </select>
 
+    <select id="select" parameterType="long" resultType="com.ysl.calendar.domain.categories.CalendarCategory">
+        select * from cal_category where id = #{id}
+    </select>
+
+    <delete id="deleteByKey" parameterType="long">
+        delete from cal_category where id = #{id}
+    </delete>
+
 </mapper>
