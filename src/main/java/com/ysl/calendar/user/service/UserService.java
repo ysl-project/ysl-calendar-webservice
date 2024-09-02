@@ -2,14 +2,20 @@ package com.ysl.calendar.user.service;
 
 import com.ysl.calendar.db.util.RedisUtil;
 import com.ysl.calendar.domain.users.CalendarUser;
+import com.ysl.calendar.security.JwtToken;
+import com.ysl.calendar.security.TokenProvider;
 import com.ysl.calendar.user.repository.UserAddRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.Random;
 
@@ -21,6 +27,9 @@ public class UserService {
     private final MailService mailService;
     private final UserAddRepository userAddRepository;
     private final RedisUtil redisUtil;
+
+    private final TokenProvider tokenProvider;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
     @Value("${spring.mail.auth-code-expiration}")
     private long authCodeExpirationSec;
@@ -107,27 +116,31 @@ public class UserService {
     }
 
     // 로그인
-    public boolean login(CalendarUser calendarUser) {
+    public JwtToken login(CalendarUser calendarUser) {
         CalendarUser loginUser = null;
         String tempPasswd = calendarUser.getPassword();
         boolean loginChk = false;
 
         try{
             loginUser = (CalendarUser) userAddRepository.findById(calendarUser.getId());
-            if(loginUser == null){
-                log.error("일치하는 회원정보가 없습니다.");
-                throw new NullPointerException();
+            // @todo : 복호화 로직
+
+            if(loginUser == null || !loginUser.getPassword().equals(tempPasswd)){
+                log.error("아이디 또는 비밀번호가 일치하지 않습니다.");
+                throw new IllegalArgumentException("아이디 또는 비밀번호가 일치하지 않습니다.");
             }
 
-            // @todo : 복호화 로직
-            String passWd = loginUser.getPassword();
-            loginChk = tempPasswd.equals(passWd) ? true : false;
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser.getId(), loginUser.getPassword());
+            Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+            JwtToken jwtToken = tokenProvider.createToken(authentication);
+
+            return jwtToken;
+
         }catch (Exception e){
             log.error("로그인 중 에러 발생");
-            log.error(e.getMessage());
+            log.error(Arrays.toString(e.getStackTrace()));
+            return null;
         }
-
-        return loginChk;
     }
 
     // 닉네임 중복 체크
