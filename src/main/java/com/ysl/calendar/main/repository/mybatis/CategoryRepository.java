@@ -4,7 +4,6 @@ import com.ysl.calendar.domain.categories.CalendarCategory;
 import com.ysl.calendar.main.repository.MainRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.ExceptionUtils;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

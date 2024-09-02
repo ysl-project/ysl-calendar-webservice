@@ -1,6 +1,7 @@
 package com.ysl.calendar.user.controller;
 
 import com.ysl.calendar.domain.users.CalendarUser;
+import com.ysl.calendar.security.JwtToken;
 import com.ysl.calendar.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,11 +41,12 @@ public class UserController {
 
     /* 로그인 */
     @PostMapping("/login")
-    public String login(@ModelAttribute CalendarUser calendarUser, RedirectAttributes redirectAttributes) {
-        boolean loginSucc = userService.login(calendarUser);
-        redirectAttributes.addAttribute("userId", calendarUser.getId());
-        redirectAttributes.addAttribute("status", loginSucc);
-        return redirectAttributes.toString();
+    public JwtToken login(@ModelAttribute CalendarUser calendarUser) {
+        JwtToken accessToken = userService.login(calendarUser);
+//        redirectAttributes.addAttribute("userId", calendarUser.getId());
+//        redirectAttributes.addAttribute("token", accessToken);
+//        return redirectAttributes.toString();
+        return accessToken;
     }
 
     /* 닉네임 체크 */

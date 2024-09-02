@@ -1,0 +1,5 @@
+secretKey: # 터미널에 openssl rand -hex 32 로 해서 생성한 값
+
+expirationMillis: 86400000
+issuer: zincah
+
